@@ -42,6 +42,7 @@ class GameEngine {
             u.start();
         });
 
+        this.lastFrame = new Date().getTime();
         this.update();
     }
 }

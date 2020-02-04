@@ -4,13 +4,16 @@
     import GameEngine from "./game/gameEngine";
     import Player, { PLAYER_W } from "./GameObjects/Player";
 
+    import Ball from "./GameObjects/Ball";
+
     const gameEngine = new GameEngine();
-    const playerOne = new Player({ name: "one", x: 5 });
-    const playerTwo = new Player({ name: "two", x: 395 - PLAYER_W });
+    const playerOne = new Player({ name: "one", x: -190 });
+    const playerTwo = new Player({ name: "two", x: 190 });
+    const ball = new Ball({ name: "Ball", startDirection: 1 });
 
 	addAudioListener(value => {
         playerOne.setY(value);
-        playerTwo.setY(15);
+        playerTwo.setY(0);
     });
     
     onMount(() => {
@@ -19,6 +22,7 @@
         gameEngine.setCanvas(canvas);
         gameEngine.addUpdatable(playerOne);
         gameEngine.addUpdatable(playerTwo);
+        gameEngine.addUpdatable(ball);
         gameEngine.start();
     });
 </script>

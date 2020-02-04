@@ -33,8 +33,6 @@ const listen = async () => {
         listeners.forEach(l => {
             l(average);
         });
-
-        console.log(average);
     }
 };
 

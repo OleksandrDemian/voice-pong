@@ -4,6 +4,7 @@ export const PLAYER_H = 40;
 export const PLAYER_W = 5;
 
 const MAX_SOUND = 70;
+const SOUND_OFFSET = 35;
 
 const lerp = (a, b, f) => {
     return a + f * (b - a);
@@ -24,7 +25,7 @@ class Player extends Updatable {
     }
 
     update(delta){
-        this.y = lerp(this.y, this.targetY, delta);
+        this.y = lerp(this.y, this.targetY - SOUND_OFFSET, delta);
     }
 
     draw(canvas){
