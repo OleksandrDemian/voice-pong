@@ -1,0 +1,44 @@
+const listeners = [];
+
+const addListener = listener => {
+    listeners.push(listener);
+};
+
+const listen = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+
+    const audioContext = new AudioContext();
+    const analyser = audioContext.createAnalyser();
+    const microphone = audioContext.createMediaStreamSource(stream);
+    const javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+
+    analyser.smoothingTimeConstant = 0.8;
+    analyser.fftSize = 1024;
+
+    microphone.connect(analyser);
+    analyser.connect(javascriptNode);
+    javascriptNode.connect(audioContext.destination);
+    javascriptNode.onaudioprocess = function() {
+        const array = new Uint8Array(analyser.frequencyBinCount);
+        let values = 0;
+
+        analyser.getByteFrequencyData(array);
+
+        const length = array.length;
+        for (let i = 0; i < length; i++) {
+            values += (array[i]);
+        }
+
+        const average = Math.round(values / length);
+        listeners.forEach(l => {
+            l(average);
+        });
+
+        console.log(average);
+    }
+};
+
+export {
+    listen,
+    addListener
+}
