@@ -3,10 +3,12 @@ import Updatable from "../game/Updatable";
 export const PLAYER_H = 40;
 export const PLAYER_W = 5;
 
-const MAX_SOUND = 70;
-const SOUND_OFFSET = 35;
+export const MULT_Y = 3;
 
-const lerp = (a, b, f) => {
+const MAX_SOUND = 70;
+export const SOUND_OFFSET = 35;
+
+export const lerp = (a, b, f) => {
     return a + f * (b - a);
 }
 
@@ -31,7 +33,7 @@ class Player extends Updatable {
     draw(canvas){
         canvas.drawRect({
             x: this.x,
-            y: this.y * 3,
+            y: this.y * MULT_Y,
             w: PLAYER_W,
             h: PLAYER_H,
             color: "black"

@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { listen, addListener as addAudioListener } from "./audio/processor";
     import GameEngine from "./game/gameEngine";
-    import Player, { PLAYER_W } from "./GameObjects/Player";
+    import Player, { PLAYER_W, SOUND_OFFSET } from "./GameObjects/Player";
 
     import Ball from "./GameObjects/Ball";
 
@@ -13,7 +13,7 @@
 
 	addAudioListener(value => {
         playerOne.setY(value);
-        playerTwo.setY(0);
+        playerTwo.setY(SOUND_OFFSET);
     });
     
     onMount(() => {

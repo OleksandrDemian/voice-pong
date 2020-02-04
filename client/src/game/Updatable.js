@@ -8,7 +8,6 @@ class Updatable {
     start(){}
     update(delta){}
     draw(canvasController){}
-
 }
 
 export default Updatable;

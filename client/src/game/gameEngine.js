@@ -1,4 +1,11 @@
 import CanvasController from "./CanvasController";
+import GameContext from "./GameContext";
+
+// const collisionData = (target) => {
+//     return {
+//         target
+//     }
+// }
 
 class GameEngine {
 
@@ -38,8 +45,11 @@ class GameEngine {
     }
 
     start(){
+        const gc = new GameContext({ engine: this });
         this.updatables.forEach(u => {
-            u.start();
+            u.start({
+                gameContext: gc
+            });
         });
 
         this.lastFrame = new Date().getTime();
